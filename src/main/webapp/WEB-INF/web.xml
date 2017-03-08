@@ -4,18 +4,38 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	id="WebApp_ID" version="3.0">
 	
-	<display-name>helloMaven</display-name>
+<!-- 	<display-name>helloMaven</display-name> -->
 	<welcome-file-list>
 		<welcome-file>hello.jsp</welcome-file>
 	</welcome-file-list>
-
+	
+	<filter>
+		 <filter-name>RequestLoggingFilter</filter-name>
+		 <filter-class>hu.mik.java2.filter.LoggingFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>RequestLoggingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+	
 	<servlet>
 		<servlet-name>hello</servlet-name>
 		<servlet-class>hu.mik.java2.servlet.HelloWorld</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>pageServlet</servlet-name>
+		<servlet-class>hu.mik.java2.servlet.PageServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>hello</servlet-name>
 		<url-pattern>/helloWorld</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>pageServlet</servlet-name>
+		<url-pattern>/pageServlet</url-pattern>
 	</servlet-mapping>
 </web-app>
