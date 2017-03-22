@@ -9,6 +9,12 @@
 		<welcome-file>hello.jsp</welcome-file>
 	</welcome-file-list>
 	
+	<listener>
+		<listener-class>
+			hu.mik.java2.listener.RequestCharEncoding
+		</listener-class>
+	</listener>
+	
 	<filter>
 		 <filter-name>RequestLoggingFilter</filter-name>
 		 <filter-class>hu.mik.java2.filter.LoggingFilter</filter-class>
