@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.beanutils.BeanUtils;
 
 import hu.mik.java2.book.bean.Book;
+import hu.mik.java2.service.BookService;
+import hu.mik.java2.service.ServiceUtils;
 
 @WebServlet(urlPatterns = "/book_edit")
 public class BookEditServlet extends HttpServlet {
@@ -20,7 +22,14 @@ public class BookEditServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Book book = new Book();
+		Book book;
+		BookService bookService = ServiceUtils.getBookService();
+		if (req.getParameter("bookId") != null) {
+			Integer bookId = new Integer(req.getParameter("bookId"));
+			book = bookService.getBookById(bookId);
+		} else {
+			book = new Book();
+		}
 		
 		req.setAttribute("book", book);
 		
@@ -40,8 +49,15 @@ public class BookEditServlet extends HttpServlet {
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			throw new RuntimeException(e);
 		}
+		BookService bookService = ServiceUtils.getBookService();
+		Book updateBook;
+		if (book.getId() == null) {
+			updateBook = bookService.saveBook(book);
+		} else {
 		
-		req.setAttribute("book", book);
+			updateBook = bookService.updateBook(book);
+		}
+		req.setAttribute("book", updateBook);
 		
 		RequestDispatcher requestDispatcher = 
 				req.getRequestDispatcher("/book_details.jsp");

@@ -31,5 +31,6 @@
 			<td><c:out value="${book.pubYear}"/></td>
 		</tr>
 	</table>
+	<a href="book_list">Vissza a könyv listához</a>
 </body>
 </html>
