@@ -12,7 +12,7 @@
 		<table border="1">
 		<tr>
 			<td>Könyv azonosítója</td>
-			<td><input name="id" value="${book.id}"/></td>
+			<td><input name="id" readonly="readonly" value="${book.id}"/></td>
 		</tr>
 		<tr>
 			<td>Könyv címe</td>

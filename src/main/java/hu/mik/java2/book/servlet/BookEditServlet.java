@@ -46,15 +46,19 @@ public class BookEditServlet extends HttpServlet {
 		Book book = new Book();
 		try {
 			BeanUtils.populate(book, req.getParameterMap());
+			if (req.getParameter("id") == null ||
+					req.getParameter("id").isEmpty()) {
+				book.setId(null);
+			}
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			throw new RuntimeException(e);
 		}
 		BookService bookService = ServiceUtils.getBookService();
+	
 		Book updateBook;
 		if (book.getId() == null) {
 			updateBook = bookService.saveBook(book);
 		} else {
-		
 			updateBook = bookService.updateBook(book);
 		}
 		req.setAttribute("book", updateBook);
