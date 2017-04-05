@@ -13,22 +13,16 @@ import javax.servlet.http.HttpServletResponse;
 import hu.mik.java2.service.BookService;
 import hu.mik.java2.service.ServiceUtils;
 
-@WebServlet(urlPatterns = "/book_list")
-public class BookServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/logout")
+public class LogoutServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		BookService bookService = ServiceUtils.getBookService();
-		req.setAttribute("books", bookService.listBooks());
-		req.setAttribute("username", req.getRemoteUser());
-		req.setAttribute("isEditor", req.isUserInRole("editor"));
+		req.getSession().invalidate();
 		
-		RequestDispatcher requestDispatcher = 
-				req.getRequestDispatcher("/book_list.jsp");
-		
-		requestDispatcher.forward(req, resp);
+		resp.sendRedirect(req.getContextPath());
 	}
 	
 	

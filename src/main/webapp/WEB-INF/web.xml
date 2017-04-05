@@ -44,4 +44,56 @@
 		<servlet-name>pageServlet</servlet-name>
 		<url-pattern>/pageServlet</url-pattern>
 	</servlet-mapping>
+	
+	<security-role>
+		<role-name>reader</role-name>
+	</security-role>
+	
+	<security-role>
+		<role-name>editor</role-name>
+	</security-role>
+	
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<form-login-config>
+			<form-login-page>/login.html</form-login-page>
+			<form-error-page>/error.html</form-error-page>
+		</form-login-config>
+	</login-config>
+	
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Kezdőoldal</web-resource-name>
+			<url-pattern>/hello.jsp</url-pattern>
+		</web-resource-collection>
+	</security-constraint>
+	
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Minden lap</web-resource-name>
+			<url-pattern>/*</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+			<http-method>DELETE</http-method>
+			<http-method>PUT</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>editor</role-name>
+			<role-name>reader</role-name>
+		</auth-constraint>
+	</security-constraint>
+	
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>Editor pages</web-resource-name>
+			<url-pattern>/book_edit</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+			<http-method>DELETE</http-method>
+			<http-method>PUT</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>editor</role-name>
+		</auth-constraint>
+	</security-constraint>
 </web-app>
