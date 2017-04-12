@@ -11,8 +11,11 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.springframework.stereotype.Component;
+
 import hu.mik.java2.book.bean.Book;
 
+@Component
 public class BookServiceNativeDbImpl implements BookService {
 
 	private DataSource dataSource;
@@ -87,13 +90,12 @@ public class BookServiceNativeDbImpl implements BookService {
 		try {
 			connection = this.dataSource.getConnection();
 			preparedStatement = connection.prepareStatement(
-					"SELECT id, author, title, description, pub_year"
-			+ " FROM t_book b WHERE b.id = ?");
+					"SELECT id, author, title, description, pub_year" + " FROM t_book b WHERE b.id = ?");
 			preparedStatement.setInt(1, id);
-			
+
 			resultSet = preparedStatement.executeQuery();
 
-			if(resultSet.next()) {
+			if (resultSet.next()) {
 				return this.mapResultSetToBook(resultSet);
 			} else {
 				throw new RuntimeException("Book not found with id: " + id);
@@ -116,15 +118,14 @@ public class BookServiceNativeDbImpl implements BookService {
 		try {
 			connection = this.dataSource.getConnection();
 			preparedStatement = connection.prepareStatement(
-					"INSERT INTO t_book(id, author, title, description, pub_year)"
-			+ " VALUES(?,?,?,?,?)");
-			
+					"INSERT INTO t_book(id, author, title, description, pub_year)" + " VALUES(?,?,?,?,?)");
+
 			preparedStatement.setInt(1, id);
 			preparedStatement.setString(2, book.getAuthor());
 			preparedStatement.setString(3, book.getTitle());
 			preparedStatement.setString(4, book.getDescription());
 			preparedStatement.setInt(5, book.getPubYear());
-			
+
 			preparedStatement.executeQuery();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -147,7 +148,7 @@ public class BookServiceNativeDbImpl implements BookService {
 		// TODO Auto-generated method stub
 
 	}
-	
+
 	private Integer getNextId() {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -155,11 +156,10 @@ public class BookServiceNativeDbImpl implements BookService {
 
 		try {
 			connection = this.dataSource.getConnection();
-			preparedStatement = connection.prepareStatement(
-					"SELECT s_book.nextval FROM dual");
+			preparedStatement = connection.prepareStatement("SELECT s_book.nextval FROM dual");
 			resultSet = preparedStatement.executeQuery();
-			
-			if(resultSet.next()) {
+
+			if (resultSet.next()) {
 				return resultSet.getInt(1);
 			} else {
 				throw new RuntimeException();

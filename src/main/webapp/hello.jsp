@@ -22,6 +22,6 @@
 		<mik:sayHello>${name}</mik:sayHello>
 	</c:forEach>
 	
-	<a href="book_list">Könyvek listája</a>
+	<a href="booking/book_list">Könyvek listája</a>
 </body>
 </html>

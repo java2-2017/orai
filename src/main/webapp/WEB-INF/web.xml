@@ -3,33 +3,45 @@
 	xmlns="http://java.sun.com/xml/ns/javaee"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	id="WebApp_ID" version="3.0">
-	
-<!-- 	<display-name>helloMaven</display-name> -->
+
+	<!-- <display-name>helloMaven</display-name> -->
 	<welcome-file-list>
 		<welcome-file>hello.jsp</welcome-file>
 	</welcome-file-list>
-	
+
 	<listener>
-		<listener-class>
-			hu.mik.java2.listener.RequestCharEncoding
-		</listener-class>
+		<listener-class>hu.mik.java2.listener.RequestCharEncoding</listener-class>
 	</listener>
-	
+
 	<filter>
-		 <filter-name>RequestLoggingFilter</filter-name>
-		 <filter-class>hu.mik.java2.filter.LoggingFilter</filter-class>
+		<filter-name>RequestLoggingFilter</filter-name>
+		<filter-class>hu.mik.java2.filter.LoggingFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>RequestLoggingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 	</filter-mapping>
-	
+
+	<servlet>
+		<servlet-name>spring-web</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/mvc-config.xml</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>spring-web</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
 	<servlet>
 		<servlet-name>hello</servlet-name>
 		<servlet-class>hu.mik.java2.servlet.HelloWorld</servlet-class>
 	</servlet>
-	
+
 	<servlet>
 		<servlet-name>pageServlet</servlet-name>
 		<servlet-class>hu.mik.java2.servlet.PageServlet</servlet-class>
@@ -39,61 +51,61 @@
 		<servlet-name>hello</servlet-name>
 		<url-pattern>/helloWorld</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet-mapping>
 		<servlet-name>pageServlet</servlet-name>
 		<url-pattern>/pageServlet</url-pattern>
 	</servlet-mapping>
-	
+
 	<security-role>
 		<role-name>reader</role-name>
 	</security-role>
-	
+
 	<security-role>
 		<role-name>editor</role-name>
 	</security-role>
-	
-	<login-config>
-		<auth-method>FORM</auth-method>
-		<form-login-config>
-			<form-login-page>/login.html</form-login-page>
-			<form-error-page>/error.html</form-error-page>
-		</form-login-config>
-	</login-config>
-	
-	<security-constraint>
-		<web-resource-collection>
-			<web-resource-name>Kezdőoldal</web-resource-name>
-			<url-pattern>/hello.jsp</url-pattern>
-		</web-resource-collection>
-	</security-constraint>
-	
-	<security-constraint>
-		<web-resource-collection>
-			<web-resource-name>Minden lap</web-resource-name>
-			<url-pattern>/*</url-pattern>
-			<http-method>GET</http-method>
-			<http-method>POST</http-method>
-			<http-method>DELETE</http-method>
-			<http-method>PUT</http-method>
-		</web-resource-collection>
-		<auth-constraint>
-			<role-name>editor</role-name>
-			<role-name>reader</role-name>
-		</auth-constraint>
-	</security-constraint>
-	
-	<security-constraint>
-		<web-resource-collection>
-			<web-resource-name>Editor pages</web-resource-name>
-			<url-pattern>/book_edit</url-pattern>
-			<http-method>GET</http-method>
-			<http-method>POST</http-method>
-			<http-method>DELETE</http-method>
-			<http-method>PUT</http-method>
-		</web-resource-collection>
-		<auth-constraint>
-			<role-name>editor</role-name>
-		</auth-constraint>
-	</security-constraint>
+
+	<!-- <login-config> -->
+	<!-- <auth-method>FORM</auth-method> -->
+	<!-- <form-login-config> -->
+	<!-- <form-login-page>/login.html</form-login-page> -->
+	<!-- <form-error-page>/error.html</form-error-page> -->
+	<!-- </form-login-config> -->
+	<!-- </login-config> -->
+
+	<!-- <security-constraint> -->
+	<!-- <web-resource-collection> -->
+	<!-- <web-resource-name>Kezdőoldal</web-resource-name> -->
+	<!-- <url-pattern>/hello.jsp</url-pattern> -->
+	<!-- </web-resource-collection> -->
+	<!-- </security-constraint> -->
+
+	<!-- <security-constraint> -->
+	<!-- <web-resource-collection> -->
+	<!-- <web-resource-name>Minden lap</web-resource-name> -->
+	<!-- <url-pattern>/*</url-pattern> -->
+	<!-- <http-method>GET</http-method> -->
+	<!-- <http-method>POST</http-method> -->
+	<!-- <http-method>DELETE</http-method> -->
+	<!-- <http-method>PUT</http-method> -->
+	<!-- </web-resource-collection> -->
+	<!-- <auth-constraint> -->
+	<!-- <role-name>editor</role-name> -->
+	<!-- <role-name>reader</role-name> -->
+	<!-- </auth-constraint> -->
+	<!-- </security-constraint> -->
+
+	<!-- <security-constraint> -->
+	<!-- <web-resource-collection> -->
+	<!-- <web-resource-name>Editor pages</web-resource-name> -->
+	<!-- <url-pattern>/book_edit</url-pattern> -->
+	<!-- <http-method>GET</http-method> -->
+	<!-- <http-method>POST</http-method> -->
+	<!-- <http-method>DELETE</http-method> -->
+	<!-- <http-method>PUT</http-method> -->
+	<!-- </web-resource-collection> -->
+	<!-- <auth-constraint> -->
+	<!-- <role-name>editor</role-name> -->
+	<!-- </auth-constraint> -->
+	<!-- </security-constraint> -->
 </web-app>
