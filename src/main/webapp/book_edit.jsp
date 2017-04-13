@@ -31,7 +31,7 @@
 			<td><input name="pubYear" value="${book.pubYear}"/></td>
 		</tr>
 	</table>
-	<input type="submit" value="Metés"/>
+	<input type="submit" value="Mentés"/>
 	</form>
 </body>
 </html>
