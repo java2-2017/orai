@@ -10,8 +10,10 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 
+@WebFilter
 public class LoggingFilter implements Filter {
 	private ServletContext servletContext;
 	

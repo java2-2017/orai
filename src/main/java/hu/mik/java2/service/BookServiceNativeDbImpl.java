@@ -11,6 +11,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import hu.mik.java2.book.bean.Book;
@@ -18,17 +19,9 @@ import hu.mik.java2.book.bean.Book;
 @Component
 public class BookServiceNativeDbImpl implements BookService {
 
+	@Autowired
 	private DataSource dataSource;
 
-	public BookServiceNativeDbImpl() {
-		try {
-			InitialContext context = new InitialContext();
-
-			this.dataSource = (DataSource) context.lookup("book/bookDatasource");
-		} catch (NamingException e) {
-			throw new RuntimeException(e);
-		}
-	}
 
 	@Override
 	public List<Book> listBooks() {
