@@ -12,4 +12,6 @@ public interface BookDao {
 	public Book save(Book book);
 	
 	public void delete(Book book);
+	
+	public List<Book> findByAuthorLike(String author);
 }

@@ -19,13 +19,20 @@ public class BookController {
 	@Qualifier("bookServiceImpl")
 	private BookService bookService;
 
-//	public BookController(BookService bookService) {
-//		this.bookService = bookService;
-//	}
+	// public BookController(BookService bookService) {
+	// this.bookService = bookService;
+	// }
 
 	@RequestMapping("/book_list")
 	public String listBooks(Model model) {
 		model.addAttribute("books", bookService.listBooks());
+
+		return "book_list";
+	}
+
+	@RequestMapping(value = "/book_search", method = RequestMethod.POST)
+	public String searchBooksByauthor(String author, Model model) {
+		model.addAttribute("books", this.bookService.listBooksByAuthor(author));
 
 		return "book_list";
 	}
@@ -75,9 +82,9 @@ public class BookController {
 	@RequestMapping(value = "/book_delete", method = RequestMethod.GET)
 	public String deleteBookGet(@RequestParam(required = true) Integer bookId) {
 		Book book = this.bookService.getBookById(bookId);
-		
+
 		this.bookService.deleteBook(book);
-		
+
 		return "redirect:book_list";
 	}
 }

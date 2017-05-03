@@ -12,6 +12,14 @@
 	<span>Üdvözlöm <c:out value="${username}"></c:out>.
 	<a href="${pageContext.request.contextPath}/logout">Kilépés</a></span>
 
+	<form action="book_search" method="post">
+		<span>Keresés szerző szerint</span>
+		<br/>
+		<input type="text" name="author"/>
+		<br/>
+		<input type="submit"/>
+	</form>
+	
 	<table border= "1">
 		<tr>
 			<th>Azonosító</th>

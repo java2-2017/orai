@@ -6,12 +6,11 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
 import hu.mik.java2.book.bean.Book;
 import hu.mik.java2.util.HibernateUtil;
 
-@Repository
+//@Repository
 public class BookDaoHibernateImpl implements BookDao {
 
 	@Autowired
@@ -45,6 +44,12 @@ public class BookDaoHibernateImpl implements BookDao {
 	public void delete(Book book) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<Book> findByAuthorLike(String author) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
