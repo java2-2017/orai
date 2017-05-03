@@ -16,6 +16,7 @@ import hu.mik.java2.service.BookService;
 public class BookController {
 
 	@Autowired
+	@Qualifier("bookServiceImpl")
 	private BookService bookService;
 
 //	public BookController(BookService bookService) {
@@ -71,4 +72,12 @@ public class BookController {
 		return "book_details";
 	}
 
+	@RequestMapping(value = "/book_delete", method = RequestMethod.GET)
+	public String deleteBookGet(@RequestParam(required = true) Integer bookId) {
+		Book book = this.bookService.getBookById(bookId);
+		
+		this.bookService.deleteBook(book);
+		
+		return "redirect:book_list";
+	}
 }

@@ -32,7 +32,7 @@
 				<a href="book_details?bookId=${book.id}" >Megtekintés</a>
 <%-- 				<c:if test="${isEditor}"> --%>
 					<a href="book_edit?bookId=${book.id}" >Szerkesztés</a>
-					<a href="book_edit?bookId=${book.id}" >Törlés</a>
+					<a href="book_delete?bookId=${book.id}" >Törlés</a>
 <%-- 				</c:if> --%>
 				</td>
 			</tr>
