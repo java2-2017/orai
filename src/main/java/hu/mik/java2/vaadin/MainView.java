@@ -3,6 +3,7 @@ package hu.mik.java2.vaadin;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.Page;
+import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -22,10 +23,11 @@ public class MainView extends VerticalLayout implements View{
 		Page.getCurrent().setTitle("Kezdőlap");
 		this.setMargin(true);
 		this.setSpacing(true);
-		Label label = new Label("Hello World!");
-		label.setSizeUndefined();
-		this.addComponent(label);
-		this.setComponentAlignment(label, Alignment.TOP_CENTER);
+		Label htmlLabel = new Label("<h1>Hello World!</h1>");
+		htmlLabel.setContentMode(ContentMode.HTML);
+		htmlLabel.setSizeUndefined();
+		this.addComponent(htmlLabel);
+		this.setComponentAlignment(htmlLabel, Alignment.TOP_CENTER);
 		
 		Button navToBookListButoon = new Button("Könyvek listája");
 		
