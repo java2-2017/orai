@@ -27,6 +27,7 @@ public class BookDaoHibernateImpl implements BookDao {
 		Session session = this.hibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = session.beginTransaction();
 		Criteria criteria = session.createCriteria(Book.class);
+		@SuppressWarnings("unchecked")
 		List<Book> list = criteria.list();
 		
 		transaction.commit();

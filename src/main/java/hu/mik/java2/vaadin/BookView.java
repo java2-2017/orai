@@ -15,6 +15,7 @@ import com.vaadin.data.util.BeanItem;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.Page;
+import com.vaadin.server.VaadinServlet;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -81,6 +82,9 @@ public class BookView extends VerticalLayout implements View {
 		Component backToMainComponent = backToMainViewButton();
 		horizontalLayout.addComponent(backToMainComponent);
 		horizontalLayout.setComponentAlignment(backToMainComponent, Alignment.BOTTOM_CENTER);
+		Component logOutComponent = logOutButton();
+		horizontalLayout.addComponent(logOutComponent);
+		horizontalLayout.setComponentAlignment(logOutComponent, Alignment.BOTTOM_CENTER);
 		return horizontalLayout;
 	}
 
@@ -155,7 +159,21 @@ public class BookView extends VerticalLayout implements View {
 		});
 		return backButton;
 	}
+	
+	private Component logOutButton() {
+		Button logOutButoon = new Button("Kilépés");
 
+		logOutButoon.addClickListener(new ClickListener() {
+
+			@Override
+			public void buttonClick(ClickEvent event) {
+				getUI().getPage().setLocation(
+						VaadinServlet.getCurrent().getServletContext().getContextPath() + "/login?logout=1");
+			}
+		});
+		
+		return logOutButoon;
+	}
 
 	protected void refreshTable() {
 		bookBean.removeAllItems();
